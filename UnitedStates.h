@@ -12,7 +12,9 @@ struct State {
 
 class UnitedStates {
     public:
-        UnitedStates(string data);
+        UnitedStates(string data); // Constructor
+        State findState(string name);
+        void simulateRound(); // States randomly attack eachother.
     private:
         void buildMap();
         vector<State> states;
