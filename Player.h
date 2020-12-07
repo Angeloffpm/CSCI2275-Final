@@ -9,17 +9,27 @@ class Player {
     public:
         Player(){};
         Player(State *state);
-        void attack(string toAttack); // Attack an Adjacent State
+        bool attack(string toAttack); // Attack an Adjacent State
         void reinforce(); // Increase army size
         void defend(); // Boost defenses
-        int getArmySize();
+        void underAttack();
         void printAdjStates();
+        void printAttackingQueue();
+        void checkWin();
+        int getArmySize();
         bool getAlive();
+        bool getWon();
+        AttackingQueue attackers;
     private:
         State* playerState;
-        AttackingQueue attackers;
+        double attackChance = 0.5;
+        bool defending = false;
         bool isAlive = true;
+        bool won = false;
         bool isAdj(string name);
+        State* findAdjState(string name);
+        void defeatPenalty(int loss);
+        void conquere(State *toConquere);
 };
 
 #endif

@@ -15,7 +15,11 @@ UnitedStates::UnitedStates(string data) {
 
 void UnitedStates::printStates() {
     for (int i = 0; i < states.size(); i++) {
-        cout << states[i]->name << " | " << states[i]->armySize << endl;
+        cout << states[i]->name << " | " << states[i]->armySize;
+        for (int j = 0; j < states[i]->adjStates.size(); j++) {
+            cout << " " << states[i]->adjStates[j]->name << "(" << states[i]->adjStates[j]->armySize << ")";
+        }
+        cout << "\n";
     }
 }
 

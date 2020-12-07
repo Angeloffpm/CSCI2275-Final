@@ -20,8 +20,6 @@ struct State {
 class UnitedStates {
     public:
         UnitedStates(string data); // Constructor
-        void simulateRound(); // States randomly attack eachother.
-        void resetGame();
         void printStates();
         State* findState(string name);
     private:
