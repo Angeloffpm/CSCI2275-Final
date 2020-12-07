@@ -28,76 +28,66 @@ int main() {
 
 
     int round = 1;
-    while(player.getAlive() && !player.getWon()) { // Run Game until Player Dies or Wins
-    
-        cout << "Round " << round << endl;
+
+    while (player.getAlive() && !player.getWon()) {
+
+        cout << '\n' << "Round " << round << endl;
         cout << "Army Size: " << player.getArmySize() << endl;
         cout << actions << endl;
 
         char action;
-        bool exit = false;
-        while (cin >> action) { // Loop until an action that counts as a 'round' is taken.
+        cin >> action;
+        cin.clear();
+        cin.ignore();
 
-            cin.clear();
-            cin.ignore();
-            switch(action) {
-                case 'a': // Attack
-                {
-                    string attackOption;
-                    cout << "Who would you like to attack? (Type \'s\' to review a list of adjacent states.): ";
+        switch(action) {
+            case 'a':
+            {
+                string attackOption;
+                cout << "Who would you like to attack? (Type \'s\' for a reminder of adjacent states):" << endl;
+                cin >> attackOption;
+                cin.clear();
+                cin.ignore();
+                while (attackOption == "s" || !player.isAdj(attackOption)) {
+                    if (attackOption == "s") {
+                        player.printAdjStates();
+                    } else {
+                        cout << "State not recognized. Try again." << endl;
+                    }
+                    cout << "Who would you like to attack? (Type \'s\' for a reminder of adjacent states):" << endl;
                     cin >> attackOption;
                     cin.clear();
                     cin.ignore();
-                    while(attackOption == "s" || !player.attack(attackOption)) {
-                        if (attackOption == "s") {
-                            player.printAdjStates();
-                        } else {
-                            cout << "Invalid target." << endl;
-                        }
-                        cout << "Who would you like to attack? (Type \'s\' to review a list of adjacent states.)";
-                        cin >> attackOption;
-                    }
-                    player.attack(attackOption);
-                    round++;
-                    break;
                 }
-                case 'd': // Defend
-                {
-                    player.defend();
-                    round++;
-                    break;
-                }
-                case 'r': // Reinforce
-                {
-                    player.reinforce();
-                    round++;
-                    break;
-                }
-                case 's': // Print Adjacent States
-                {
-                    player.printAdjStates();
-                    break;
-                }
-                case 'q': // Quit Game
-                {
-                    cout << "Quitting." << endl;
-                    exit = true;
-                }
-                default:
-                {
-                    cout << "Command not recognized." << endl;
-                    break;
-                }
+                player.attack(attackOption);
+                round++;
+                break;
             }
-
-            if (exit) {
+            case 'd':
+            {
+                player.defend();
+                round++;
+                break;
+            }
+            case 'r':
+            {
+                player.reinforce();
+                round++;
+                break;
+            }
+            case 's':
+            {
+                player.printAdjStates();
+                break;
+            }
+            case 'q':
+            {
                 return 0;
             }
-
         }
 
         player.underAttack();
-        player.printAttackingQueue();
+        // player.printAttackingQueue();
         player.checkWin();
 
     }

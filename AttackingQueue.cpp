@@ -1,5 +1,6 @@
 #include <iostream>
 #include "AttackingQueue.h"
+#include "UnitedStates.h"
 
 // ==============
 // Public Methods
@@ -50,10 +51,10 @@ bool AttackingQueue::isFull() {
 void AttackingQueue::printQueue() {
     cout << "States Planning Attacks on You (Soonest First):" << endl;
     for (int i = front; i < currentSize + front; i++) {
-        if (i < currentSize) {
+        if (i < capacity) {
             cout << queue[i]->name << " is planning on attacking with an army size of " << queue[i]->armySize << "!" << endl;
         } else {
-            cout << queue[i - currentSize]->name << " is planning on attacking with an army size of " << queue[i - currentSize]->armySize << "!" << endl;
+            cout << queue[i - capacity]->name << " is planning on attacking with an army size of " << queue[i - capacity]->armySize << "!" << endl;
         }
     }
 }

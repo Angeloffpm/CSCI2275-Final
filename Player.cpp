@@ -11,6 +11,7 @@ using namespace std;
 
 Player::Player(State *state) {
     playerState = state;
+    attackers = AttackingQueue(3);
 }
 
 bool Player::attack(string toAttack) {
@@ -59,7 +60,6 @@ void Player::underAttack() {
         if (defending) {
             defenseMultiper = 4;
         }
-
     } else {
         cout << "No adjacent states attacked you this round." << endl;
     }
@@ -76,7 +76,7 @@ void Player::printAdjStates() {
 void Player::printAttackingQueue() { // Chance to add a random state to the attackers, then prints queue.
 
     if (((double) rand() / (RAND_MAX)) > 0.5) {
-        State *randomState = playerState->adjStates[rand() % playerState->adjStates.size()];
+        State *randomState = playerState->adjStates[ rand() % playerState->adjStates.size() ];
         if (!randomState->defeated) {
             attackers.enqueue(randomState);
         }

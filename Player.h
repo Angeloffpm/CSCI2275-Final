@@ -16,6 +16,7 @@ class Player {
         void printAdjStates();
         void printAttackingQueue();
         void checkWin();
+        bool isAdj(string name);
         int getArmySize();
         bool getAlive();
         bool getWon();
@@ -26,7 +27,6 @@ class Player {
         bool defending = false;
         bool isAlive = true;
         bool won = false;
-        bool isAdj(string name);
         State* findAdjState(string name);
         void defeatPenalty(int loss);
         void conquere(State *toConquere);
