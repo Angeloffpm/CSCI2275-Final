@@ -18,6 +18,7 @@ int main() {
         cin >> state;
     }
     Player player = Player(US.findState(state));
+    // US.printStates();
 
     string actions = "Type \'a\' to launch an attack.\n"
                         "Type \'d\' to defend an incoming attack.\n"
@@ -25,26 +26,28 @@ int main() {
                         "Type \'s\' to review a list of adjacent states.\n"
                         "Type \'q\' to quit the game at any time.";
 
-    US.printStates();
 
     int round = 1;
-    char action;
     while(player.getAlive() && !player.getWon()) { // Run Game until Player Dies or Wins
     
         cout << "Round " << round << endl;
         cout << "Army Size: " << player.getArmySize() << endl;
         cout << actions << endl;
-        cout << "Choose an action: " << endl;
-        cin >> action;
 
-        int currentRound = round;
-        string attackOption;
-        while (currentRound == round) { // Loop until an action that counts as a 'round' is taken.
+        char action;
+        bool exit = false;
+        while (cin >> action) { // Loop until an action that counts as a 'round' is taken.
+
+            cin.clear();
+            cin.ignore();
             switch(action) {
-                case 'a':
-
-                    cout << "Who would you like to attack? (Type \'s\' to review a list of adjacent states.)";
+                case 'a': // Attack
+                {
+                    string attackOption;
+                    cout << "Who would you like to attack? (Type \'s\' to review a list of adjacent states.): ";
                     cin >> attackOption;
+                    cin.clear();
+                    cin.ignore();
                     while(attackOption == "s" || !player.attack(attackOption)) {
                         if (attackOption == "s") {
                             player.printAdjStates();
@@ -56,29 +59,41 @@ int main() {
                     }
                     player.attack(attackOption);
                     round++;
-
-                case 'd':
-
+                    break;
+                }
+                case 'd': // Defend
+                {
                     player.defend();
                     round++;
-
-                case 'r':
-
+                    break;
+                }
+                case 'r': // Reinforce
+                {
                     player.reinforce();
                     round++;
-
-                case 's':
-
+                    break;
+                }
+                case 's': // Print Adjacent States
+                {
                     player.printAdjStates();
-
-                case 'q':
-
-                    return 0;
-
+                    break;
+                }
+                case 'q': // Quit Game
+                {
+                    cout << "Quitting." << endl;
+                    exit = true;
+                }
                 default:
-
+                {
                     cout << "Command not recognized." << endl;
+                    break;
+                }
             }
+
+            if (exit) {
+                return 0;
+            }
+
         }
 
         player.underAttack();
@@ -91,5 +106,6 @@ int main() {
         cout << "Congratulations! You won the 2020 Civil War!" << endl;
     }
 
+    return 0;
 
 }

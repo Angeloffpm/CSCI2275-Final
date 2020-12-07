@@ -16,13 +16,13 @@ Player::Player(State *state) {
 bool Player::attack(string toAttack) {
     if (isAdj(toAttack)) {
         if (findAdjState(toAttack)->defeated) {
-            cout << "State already defeated" << endl;
+            cout << "State already defeated." << endl;
             return false;
         } else {
             int attackerValue = rand() % playerState->armySize;
             int defenderValue = rand() % findAdjState(toAttack)->armySize;
             if (attackerValue > defenderValue) { // Victory
-                cout << "Your army wont the attack!" << endl;
+                cout << "Your army won the attack!" << endl;
                 conquere(findAdjState(toAttack));
             } else { // Defeat
                 cout << "Your army lost the attack!" << endl;
@@ -68,7 +68,7 @@ void Player::underAttack() {
 
 void Player::printAdjStates() {
     cout << "Adjacent States:" << endl;
-    for (int i = 0; i < playerState->adjStates.size(); i++) {
+    for (int i = 0; i < playerState->adjStates.size() - 1; i++) {
         cout << playerState->adjStates[i]->name << " | Army Size: " << playerState->adjStates[i]->armySize << endl;
     }
 }
@@ -90,13 +90,9 @@ void Player::printAttackingQueue() { // Chance to add a random state to the atta
 }
 
 void Player::checkWin() {
-    if (!playerState->adjStates.size() == 47) {
-        return;
-    } else {
-        for (int i = 0; i < playerState->adjStates.size(); i++) {
-            if (!playerState->adjStates[i]->defeated) {
-                return;
-            }
+    for (int i = 0; i < playerState->adjStates.size() - 1; i++) {
+        if (!playerState->adjStates[i]->defeated) {
+            return;
         }
     }
     won = true;

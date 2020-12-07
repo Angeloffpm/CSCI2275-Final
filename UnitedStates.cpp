@@ -14,12 +14,12 @@ UnitedStates::UnitedStates(string data) {
 }
 
 void UnitedStates::printStates() {
-    for (int i = 0; i < states.size(); i++) {
-        cout << states[i]->name << " | " << states[i]->armySize;
-        for (int j = 0; j < states[i]->adjStates.size(); j++) {
-            cout << " " << states[i]->adjStates[j]->name << "(" << states[i]->adjStates[j]->armySize << ")";
+    for (int i = 1; i < states.size(); i++) {
+        cout << states[i]->name << " | " << states[i]->armySize << endl;
+        for (int j = 0; j < states[i]->adjStates.size() - 1; j++) {
+            cout << states[i]->adjStates[j]->name << endl;
+            cout << states[i]->adjStates[j]->armySize << endl;
         }
-        cout << "\n";
     }
 }
 
@@ -42,30 +42,26 @@ void UnitedStates::buildMap(string data) {
 
     while (getline(inStream, line)) {
         stringstream ss(line);
-        State *toAdd;
-
-        getline(ss, currentElement, ','); // Name
-        if (findState(currentElement) != nullptr) {
-            toAdd = findState(currentElement);
-        } else {
-            toAdd = new State;
-            toAdd->name = currentElement;
-        }
-
-        getline(ss, currentElement, ','); // Army Size
-        toAdd->armySize = stoi(currentElement);
-
-        while (getline(ss, currentElement, ',')) { // Adjacent States
-            if (findState(currentElement) != nullptr) {
-                toAdd->adjStates.push_back(findState(currentElement));
-            } else {
-                State *newAdjState = new State;
-                newAdjState->name = currentElement;
-                toAdd->adjStates.push_back(newAdjState);
-            }
-        }
+        State *toAdd = new State;
+        string stateName;
+        getline(ss, stateName, ',');
+        toAdd->name = stateName;
         states.push_back(toAdd);
     }
+
+    inStream.clear();
+    inStream.seekg(0, ios::beg);
+    while (getline(inStream, line)) {
+        stringstream ss(line);
+        getline(ss, currentElement, ',');
+        State *toAdjust = findState(currentElement);
+        getline(ss, currentElement, ',');
+        toAdjust->armySize = stoi(currentElement);
+        while (getline(ss, currentElement, ',')) {
+            toAdjust->adjStates.push_back(findState(currentElement));
+        }
+    }
+
     inStream.close();
 }
 
