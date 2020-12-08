@@ -3,6 +3,9 @@
 ## The Concept
 2020 has been a wild year. Among all the turmoil that has plagued the country, the United States has gone to civil war! Each state claims their own army and wants to claim the United States for themselves! You, the Player, get to choose which State to play as, and develop a strategy to take over the United States!
 
+## What Works and What Doesnt
+Unfortunately there is currently no way to win the game. This is because of a bug I have been unsuccessful at fixing where the last vertex in a state's adjacency list appears to be broken in some manner. As a result, the last state in this list appears to be unaccessible, and conquering a state, and thus adopting their neighbors, also is broken as inheriting the last item in their adjacency list also breaks the code. I've had to comment this out. The attackers queue also seems to be broken when trying to enqueue to it. I also was unable to resolve this bug so you will not be attacked. That leaves, in the game's current state, only the ability to attack neighbors, without inheriting their lands, reinforce, and defense (which is pointless as the attackers queue is not functional).
+
 ## Instructions
 To start running the game, open the project in any terminal, compile it if necessary using the command:
 g++ -std=c++11 CivilWarSimulator.cpp UnitedStates.cpp Player.cpp AttackingQueue.cpp -o CivilWarSimulator
