@@ -1,12 +1,11 @@
 # Civil War Simulator 2020
 
-## The Concept
+## Project Summary
 2020 has been a wild year. Among all the turmoil that has plagued the country, the United States has gone to civil war! Each state claims their own army and wants to claim the United States for themselves! You, the Player, get to choose which State to play as, and develop a strategy to take over the United States!
+### CSCI 2275 Content
+Civil War Simulator 2020 utilizes two key data structures: Graphs and Queues. The entire United States is built as a Graph, each State representing a vertex and its bordering states create edges. This allows each State to be limited to who it can attack, based on its adjacent states. You will also face a queue for attackers. Each round, there is a chance that a neighboring state will be queued to attack you. Each round, there is also a chance that the attacking queue will dequeue and you will be attacked by the State at the front of the queue. If you know a larger State like California is planning on attacking soon, you may want to defend your state or reinforce your army, as opposed to attacking a neighboring state.
 
-## What Works and What Doesnt
-Unfortunately there is currently no way to win the game. This is because of a bug I have been unsuccessful at fixing where the last vertex in a state's adjacency list appears to be broken in some manner. As a result, the last state in this list appears to be unaccessible, and conquering a state, and thus adopting their neighbors, also is broken as inheriting the last item in their adjacency list also breaks the code. I've had to comment this out. The attackers queue also seems to be broken when trying to enqueue to it. I also was unable to resolve this bug so you will not be attacked. That leaves, in the game's current state, only the ability to attack neighbors, without inheriting their lands, reinforce, and defense (which is pointless as the attackers queue is not functional).
-
-## Instructions
+## How to Run
 To start running the game, open the project in any terminal, compile it if necessary using the command:
 g++ -std=c++11 CivilWarSimulator.cpp UnitedStates.cpp Player.cpp AttackingQueue.cpp -o CivilWarSimulator
 And, run the program by typing ./CivilWarSimulator in the terminal.
@@ -18,5 +17,20 @@ Choosing to defend will bolster your defenses in preparation for an oncoming att
 ### Reinforce
 Choosing to reinforce your army can boost both attacking and defending chances, as it is a flat increase in army size. Having a bigger army will increase your chances of a successful attack and defense. Do this when it is safe to, and before taking on bigger states.
 
-## CSCI 2275 Content
-Civil War Simulator 2020 utilizes two key data structures: Graphs and Queues. The entire United States is built as a Graph, each State representing a vertex and its bordering states create edges. This allows each State to be limited to who it can attack, based on its adjacent states. You will also face a queue for attackers. Each round, there is a chance that a neighboring state will be queued to attack you. Each round, there is also a chance that the attacking queue will dequeue and you will be attacked by the State at the front of the queue. If you know a larger State like California is planning on attacking soon, you may want to defend your state or reinforce your army, as opposed to attacking a neighboring state.
+## Dependencies
+No third-party libraries are required.
+
+## System Requirements
+Any system that can compile and run c++ code should experience no issue running the program.
+
+## Team Members
+Pierce Angeloff
+
+## Contributors
+No Contributors
+
+## Open issues / bugs
+- Unfortunately there is currently no way to win the game. This is because of a bug I have been unsuccessful at fixing where the last vertex in a state's adjacency list appears to be broken in some manner. As a result, the last state in this list appears to be unaccessible, and conquering a state, and thus adopting their neighbors, also is broken as inheriting the last item in their adjacency list also breaks the code. I've had to comment this out. 
+- The attackers queue also seems to be broken when trying to enqueue to it. I also was unable to resolve this bug so you will not be attacked. That leaves, in the game's current state, only the ability to attack neighbors, without inheriting their lands, reinforce, and defense (which is pointless as the attackers queue is not functional).
+- Certain messages appear twice in the terminal, such as "Entered state name is not recognized"
+- Somehow the program will occasionally miss the break; statements, thus running multiple actions without the player designating that.

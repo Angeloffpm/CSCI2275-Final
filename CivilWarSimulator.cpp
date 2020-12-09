@@ -12,10 +12,10 @@ int main() {
 
     string state;
     cout << "Enter the state you wish to play as: " << endl;
-    cin >> state;
+    getline(cin, state);
     while (US.findState(state) == nullptr) {
         cout << "Not a valid state. Please try again: " << endl;
-        cin >> state;
+        getline(cin, state);
     }
     Player player = Player(US.findState(state));
     // US.printStates();
@@ -45,7 +45,7 @@ int main() {
             {
                 string attackOption;
                 cout << "Who would you like to attack? (Type \'s\' for a reminder of adjacent states):" << endl;
-                cin >> attackOption;
+                getline(cin, attackOption);
                 cin.clear();
                 cin.ignore();
                 while (attackOption == "s" || !player.isAdj(attackOption)) {
@@ -55,7 +55,7 @@ int main() {
                         cout << "State not recognized. Try again." << endl;
                     }
                     cout << "Who would you like to attack? (Type \'s\' for a reminder of adjacent states):" << endl;
-                    cin >> attackOption;
+                    getline(cin, attackOption);
                     cin.clear();
                     cin.ignore();
                 }
