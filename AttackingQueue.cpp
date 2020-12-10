@@ -15,13 +15,13 @@ void AttackingQueue::enqueue(State *toQueue) {
     if (isFull()) {
         return;
     } else {
+        queue[back] = toQueue;
         currentSize++;
         if (back != capacity - 1) {
             back++;
         } else {
             back = 0;
         }
-        queue[back] = toQueue;
     }
 }
 

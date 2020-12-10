@@ -30,7 +30,7 @@ Pierce Angeloff
 No Contributors
 
 ## Open issues / bugs
-- Unfortunately there is currently no way to win the game. This is because of a bug I have been unsuccessful at fixing where the last vertex in a state's adjacency list appears to be broken in some manner. As a result, the last state in this list appears to be unaccessible, and conquering a state, and thus adopting their neighbors, also is broken as inheriting the last item in their adjacency list also breaks the code. I've had to comment this out. 
-- The attackers queue also seems to be broken when trying to enqueue to it. I also was unable to resolve this bug so you will not be attacked. That leaves, in the game's current state, only the ability to attack neighbors, without inheriting their lands, reinforce, and defense (which is pointless as the attackers queue is not functional).
+- Unfortunately there is currently no way to win the game. Conquering other states is bugged and breaks when it tries to inherits the conquered's neighbors.
+- The attackers queue will sometimes break the program when it fills completely and the game attempts to enqueue to it.
 - Certain messages appear twice in the terminal, such as "Entered state name is not recognized"
 - Somehow the program will occasionally miss the break; statements, thus running multiple actions without the player designating that.

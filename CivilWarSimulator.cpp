@@ -46,8 +46,8 @@ int main() {
                 string attackOption;
                 cout << "Who would you like to attack? (Type \'s\' for a reminder of adjacent states):" << endl;
                 getline(cin, attackOption);
-                cin.clear();
-                cin.ignore();
+                // cin.clear();
+                // cin.ignore();
                 while (attackOption == "s" || !player.isAdj(attackOption)) {
                     if (attackOption == "s") {
                         player.printAdjStates();
@@ -87,7 +87,8 @@ int main() {
         }
 
         player.underAttack();
-        // player.printAttackingQueue();
+        // Comment Out
+        player.printAttackingQueue();
         player.checkWin();
 
     }

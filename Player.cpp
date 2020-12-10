@@ -144,14 +144,16 @@ void Player::defeatPenalty(int loss) {
 }
 
 void Player::conquere(State *toConquere) {
-    cout << "You won! But the Conquering function is currently broken. Sorry!" << endl;
-    // cout << "You conquered " << toConquere->name << "! You gain their land and their army of " << toConquere->armySize << "." << endl;
-    // for (int i = 0; i < toConquere->adjStates.size(); i++) {
-    //     if (!isAdj(toConquere->adjStates[i]->name) && toConquere->adjStates[i]->name != playerState->name) {
-    //         playerState->adjStates.push_back(toConquere->adjStates[i]);
-    //     }
-    // }
-    // playerState->armySize += toConquere->armySize;
-    // toConquere->armySize = 0;
-    // toConquere->defeated = true;
+    // cout << "You won! But the Conquering function is currently broken. Sorry!" << endl;
+    cout << "You conquered " << toConquere->name << "! You gain their land and their army of " << toConquere->armySize << "." << endl;
+    for (int i = 0; i < toConquere->adjStates.size(); i++) {
+        if (!isAdj(toConquere->adjStates[i]->name) && toConquere->adjStates[i] != playerState) {
+            cout << "adding" << endl;
+            playerState->adjStates.push_back(toConquere->adjStates[i]);
+        }
+    }
+    playerState->armySize += toConquere->armySize;
+    toConquere->armySize = 0;
+    toConquere->defeated = true;
+    printAdjStates();
 }
